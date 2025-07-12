@@ -224,7 +224,7 @@ let
       {
         sendmail = "'${neomutt.sendMailCommand}'";
       }
-    else
+    else if passwordCommand != null then
       let
         smtpProto = if smtp.tls.enable && !smtp.tls.useStartTls then "smtps" else "smtp";
         smtpPort = if smtp.port != null then ":${toString smtp.port}" else "";
@@ -233,7 +233,9 @@ let
       {
         smtp_url = "'${smtpBaseUrl}'";
         smtp_pass = ''"`${passCmd}`"'';
-      };
+      }
+    else
+      { };
 
   genAccountConfig =
     account:
