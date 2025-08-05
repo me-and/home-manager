@@ -33,7 +33,7 @@ let
   moduleName = "programs.thunderbird";
 
   enabledAccounts = attrValues (
-    lib.filterAttrs (_: a: a.thunderbird.enable) config.accounts.email.accounts
+    lib.filterAttrs (_: a: a.enable && a.thunderbird.enable) config.accounts.email.accounts
   );
 
   enabledAccountsWithId = map (a: a // { id = builtins.hashString "sha256" a.name; }) enabledAccounts;
